@@ -5,12 +5,11 @@ public class Main {
         LinkedList myList = new LinkedList();
 
 
-        myList.addLast(1);
-        myList.addLast(2);
-        myList.addLast(3);
-        myList.addFirst(0);
+        myList.addFirst(30);
+        myList.addFirst(20);
+        myList.addFirst(10);
 
-        System.out.println(myList.indexOf(2));
+        myList.reverse();
 
         myList.print();
     }

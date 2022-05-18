@@ -3,30 +3,39 @@ public class LinkedList {
     private Node first;
     private Node last;
 
+    private boolean isEmpty() {
+        return first == null;
+    }
+
     public void addFirst(int value) {
-        if (first == null) {
-            first = new Node(value, null);
-            if (last == null)
-                last = first;
+        if (isEmpty()) {
+            first = new Node(value, null, null);
+            last = first;
+            last.prev = first;
+
         } else {
-            first = new Node(value, first);
+            var newNode = new Node(value, first, null);
+            first.prev = newNode;
+            first = newNode;
         }
     }
 
-    public void addLast(int value) {
-
-        Node l = last;
-        last = new Node(value, null);
-
-        if (l == null)
-            first = last;
-        else
-            l.next = last;
-
-    }
+//    public void addLast(int value) {
+//
+//        var node = new Node(value, null);
+//
+//        if (isEmpty()) {
+//            first = last = node;
+//        } else {
+//            last.next = node;
+//            last = node;
+//        }
+//    }
 
     public void deleteFirst() {
-        first = first.next;
+        var second = first.next;
+        first.next = null;
+        first = second;
     }
 
     public void deleteLast() {
@@ -53,11 +62,11 @@ public class LinkedList {
         Node item = first;
 
         while (item != null) {
-            if (item.value == value) break;
+            if (item.value == value) return counter;
             item = item.next;
             counter++;
         }
-        return counter;
+        return -1;
     }
 
     public void print() {
@@ -69,10 +78,27 @@ public class LinkedList {
         } while (item != null);
     }
 
+    public void reverse() {
+        var newList = new LinkedList();
+
+        var item = first;
+
+        while (item != null ){
+            newList.addFirst(item.value);
+            item = item.next;
+        }
+
+        newList.print();
+
+        first = newList.first;
+        last = newList.last;
+    }
+
 //    addFirst Done
 //    addLast Done
 //    deleteFirst Done
 //    deleteLast Done
 //    contains Done
 //    indexOf Done
+//    reverse
 }
