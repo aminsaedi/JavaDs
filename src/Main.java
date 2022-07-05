@@ -1,18 +1,16 @@
-import java.util.Arrays;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        LinkedList myList = new LinkedList();
 
-        myList.addLast(1);
-        myList.addLast(2);
-        myList.addLast(3);
-        myList.addLast(4);
-        myList.addLast(5);
-        myList.addLast(6);
 
-        myList.printMiddle();
+    public static  void main(String[] args) {
+        var minHeap = new MinHeap();
 
-//        System.out.println(myList.getKthNodeFormTheEnd(4).value);
+        minHeap.insert(1, "Amin");
+        minHeap.insert(3, "Saedi");
+        minHeap.insert(5, "Kambiz");
+        minHeap.insert(2, "Fesharaki");
+
+        minHeap.print();
     }
 }

@@ -4,15 +4,24 @@ public class LinkedList {
     private Node last;
     private int count = 0;
 
-    public void addFirst(int value) {
-        if (first == null) {
-            first = new Node(value, null);
-                last = first;
-        } else {
-            first = new Node(value, first);
-        }
-        count++;
+    public LinkedList(){
+        var n10 = new Node(10, null);
+        var n20 = new Node(20, null);
+        var n30 = new Node(30, null);
+        var n40 = new Node(40, null);
+        var n50 = new Node(50, null);
+
+        first = n10;
+        first.next = n20;
+        first.next.next = n30;
+        first.next.next.next = n40;
+        first.next.next.next.next = n50;
+//        first.next.next.next.next.next =  first.next.next;
+
+
     }
+
+
 
     public void addLast(int value) {
 
@@ -135,19 +144,35 @@ public class LinkedList {
 
     public void printMiddle(){
 //        [1, 2, 3, 4, 5, 6] => i = 0, 1 always zoj = i
-//               *  *
+//               *
+//                     *
 //        [1, 2, 3, 4, 5] always fard = i
-//             *  *
+//               *
+//                      *
         Node p1 = first;
-        Node p2 = last;
+        Node p2 = first;
 
-        while (true){
+        while (p2 != last && p2.next != last){
             p1 = p1.next;
-            p2 = getPrev(p2);
-            if (p1 == p2 || p1.next == p2) break;
+            p2 = p2.next.next;
         }
         System.out.println(p1.value);
-        System.out.println(p2.value);
+        if (p2.next != null){
+            System.out.println(p1.next.value);
+        }
+
+    }
+
+    public boolean hasLoop(){
+        Node p1= first;
+        Node p2 = first;
+
+        while (p2 != null && p2.next != null){
+            if (p2.next == p1) return  true;
+            p1 = p1.next;
+            p2 = p2.next.next;
+        }
+        return false;
     }
 
 //    addFirst Done
