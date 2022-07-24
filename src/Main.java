@@ -3,14 +3,22 @@ import java.util.*;
 public class Main {
 
 
-    public static  void main(String[] args) {
-        var minHeap = new MinHeap();
+    public static void main(String[] args) {
+        var graph = new Graph();
 
-        minHeap.insert(1, "Amin");
-        minHeap.insert(3, "Saedi");
-        minHeap.insert(5, "Kambiz");
-        minHeap.insert(2, "Fesharaki");
+        graph.addNode("Amin");
+        graph.addNode("Ho3ein");
+        graph.addNode("Mamad");
+        graph.addNode("Amir");
+        graph.addNode("Ali");
 
-        minHeap.print();
+
+        graph.addEdge("Amin", "Amir");
+        graph.addEdge("Amin", "Ho3in");
+        graph.addEdge("Amin", "Mamad");
+        graph.addEdge("Amin", "Ali");
+
+        graph.removeNode("Ali");
+        graph.print();
     }
 }

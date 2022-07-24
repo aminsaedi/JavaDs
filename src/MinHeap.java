@@ -32,12 +32,65 @@ public class MinHeap {
         }
     }
 
-    public void remove(){
-        swap();
+    public String remove(){
+        var removedItem = items.get(0);
+        swap(0, items.size() - 1);
+        items.remove(items.size() - 1);
+        bubbleDown();
+        return removedItem.toString();
+
     }
 
     public void print() {
         System.out.println(items);
+    }
+
+    private void bubbleDown(){
+        int index = 0;
+        while (index <= items.size() && !isValidParent(index)){
+            int smallerItemIndex = smallerChildIndex(index);
+            swap(index, smallerItemIndex);
+            index = smallerItemIndex;
+        }
+    }
+
+    private int smallerChildIndex(int index){
+        if (!hasLeftChild(index))
+            return index;
+        if (!hasRightChild(index))
+            return leftChildIndex(index);
+        return leftChild(index).key < rightChild(index).key ? leftChildIndex(index) : rightChildIndex(index);
+    }
+
+    private boolean isValidParent(int index){
+        if (!hasLeftChild(index))
+            return true;
+        var isValid = items.get(index).key < leftChild(index).key;
+
+        if (hasRightChild(index))
+            isValid &= items.get(index).key < rightChild(index).key;
+
+        return isValid;
+    }
+
+    private int leftChildIndex(int index){
+        return index * 2 + 1;
+    }
+    private boolean hasLeftChild(int index){
+        return leftChildIndex(index) < items.size();
+    }
+    private Node leftChild(int index){
+        return items.get(leftChildIndex(index));
+    }
+
+    private int rightChildIndex(int index){
+        return index * 2 + 2;
+    }
+    private boolean hasRightChild(int index){
+        return rightChildIndex(index) < items.size();
+    }
+    private Node rightChild(int index){
+        return items.get(rightChildIndex(index));
     }
 
     private void swap(int indexOne, int indexTwo) {
